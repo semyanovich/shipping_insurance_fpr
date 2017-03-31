@@ -1,0 +1,11 @@
+<?php $amount = $this->helper('shipping_insurance')->getInsurance();?>
+<ul class="form-list">
+    <li id="shippinginsurance">
+        <fieldset>
+            <label for="has_insurance"><strong></strong><?php echo $this->__('Use Shipping Insurance') ?><strong></label>
+            <input type="checkbox" name="has_insurance"
+                   title="<?php echo $this->__('Enable Shipping Insurance') ?>" value="1"  checked="checked" class="checkbox" />
+        </fieldset>
+    </li>
+</ul>
+<?php echo $this->__('Insurance: ' . $this->helper('checkout')->formatPrice($amount)) ?>

@@ -1,5 +1,9 @@
 <?xml version="1.0" ?>
 <config>
     <modules>
+        <Shipping_Insurance>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Shipping_Insurance>
     </modules>
 </config>

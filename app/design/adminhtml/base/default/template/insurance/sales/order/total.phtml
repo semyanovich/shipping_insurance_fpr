@@ -1,0 +1,10 @@
+<?php $shipping_insurance = Mage::helper('adminhtml_shipping_insurance')->getExtShippingInfo($this->getOrder()->getId());?>
+
+<?php if ($shipping_insurance): ?>
+    <tr>
+        <td class="label"><?php echo Mage::helper('shipping_insurance')->__('Shipping Insurance') ?></td>
+        <td>
+            <?php echo $this->helper('checkout')->formatPrice($shipping_insurance); ?>
+        </td>
+    </tr>
+<?php endif;?>
