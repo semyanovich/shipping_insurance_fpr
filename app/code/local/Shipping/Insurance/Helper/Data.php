@@ -16,14 +16,6 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /*
-     * return is_new_step setting
-     */
-    public function isNewStep()
-    {
-        return (Mage::getStoreConfig(self::XML_PATCH . 'is_new_step', Mage::app()->getStore()) == 1);
-    }
-
-    /*
      * return value of amount
      */
     public function getAmount()
@@ -75,5 +67,19 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
             }
         } 
         return false;
+    }
+
+    public function setInsurance($entity){
+        if (get_class($entity) === "Mage_Sales_Model_Quote_Address") {
+            $data = $entity->getQuote();
+        } else {
+            $data = $entity->getOrder();
+        }
+        $insurance_amount = $data->getShippingInsuranceAmount();
+        if ($insurance_amount > 0) {
+            $entity->setGrandTotal($entity->getGrandTotal() + $insurance_amount);
+            $entity->setBaseGrandTotal($entity->getBaseGrandTotal() + $insurance_amount);
+        }
+        return $this;
     }
 }   

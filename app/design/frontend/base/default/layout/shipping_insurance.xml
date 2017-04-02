@@ -2,12 +2,6 @@
 <layout>
     <checkout_onepage_index>
         <reference name="checkout.onepage">
-            <action method="setTemplate">
-                <template>insurance/onepage.phtml</template>
-            </action>
-            <block type="insurance/checkout_onepage_shippinginsurance" name="shippinginsurance" template="insurance/onepage/shippinginsurance.phtml">
-                <block type="insurance/checkout_onepage_shippinginsurance" name="insurance.checkbox" template="insurance/onepage/shipping/method/checkbox.phtml"/>
-            </block>
             <block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method" as="shipping_method">
                 <action method="setTemplate">
                     <template>insurance/onepage/shipping/method.phtml</template>

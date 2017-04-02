@@ -27,16 +27,6 @@
                             <show_in_store>1</show_in_store>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                         </is_enable>
-                        <is_new_step>
-                            <label>Show as new step: </label>
-                            <frontend_type>select</frontend_type>
-                            <sort_order>10</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <depends><is_enable>1</is_enable></depends>
-                        </is_new_step>
                         <type>
                             <label>Insurance Type:</label>
                             <frontend_type>select</frontend_type>

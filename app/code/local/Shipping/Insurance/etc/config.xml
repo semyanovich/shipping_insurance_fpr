@@ -2,30 +2,30 @@
 <config>
     <modules>
         <Shipping_Insurance>
-            <version>0.0.1</version>
+            <version>0.1.1</version>
         </Shipping_Insurance>
     </modules>
     <global>
         <models>
             <insurance>
-                <class>Shipping_Insurance_Model</class>
+                <class>shipping_insurance_model</class>
             </insurance>
         </models>
         <helpers>
             <shipping_insurance>
-                <class>Shipping_Insurance_Helper</class>
+                <class>shipping_insurance_helper</class>
             </shipping_insurance>
             <adminhtml_shipping_insurance>
-                        <class>Shipping_Insurance_Helper_Adminhtml</class>
+                        <class>shipping_insurance_helper_adminhtml</class>
             </adminhtml_shipping_insurance>
         </helpers>
         <blocks>
             <insurance>
-                <class>Shipping_Insurance_Block</class>
+                <class>shipping_insurance_block</class>
             </insurance>
             <checkout>
                 <rewrite>
-                    <onepage>Shipping_Insurance_Block_Checkout_Onepage</onepage>
+                    <onepage>shipping_insurance_block_checkout_onepage</onepage>
                 </rewrite>
             </checkout>
         </blocks>
@@ -37,7 +37,93 @@
                     </insurance>
                 </totals>
             </quote>
+            <order>
+                <totals>
+                    <insurance>
+                        <class>insurance/sales_order_total_insurance</class>
+                    </insurance>
+                </totals>
+            </order>
+            <order_invoice>
+                <totals>
+                    <insurance>
+                        <class>insurance/sales_order_total_invoice_insurance</class>
+                    </insurance>
+                </totals>
+            </order_invoice>
+            <order_creditmemo>
+                <totals>
+                    <insurance>
+                        <class>insurance/sales_order_total_creditmemo_insurance</class>
+                    </insurance>
+                </totals>
+            </order_creditmemo>
         </sales>
+        <resources>
+            <insurance_setup>
+                <setup>
+                    <module>Shipping_Insurance</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </insurance_setup>
+        </resources>
+        <events>
+            <controller_action_predispatch_checkout_onepage_saveShippingMethod>
+                <observers>
+                    <shipping_method_insurance>
+                        <type>singleton</type>
+                        <class>insurance/observer</class>
+                        <method>saveShippingMethod</method>
+                    </shipping_method_insurance>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_saveShippingMethod>
+            <sales_order_save_before>
+                <observers>
+                    <save_order_insurance>
+                        <type>singleton</type>
+                        <class>insurance/observer</class>
+                        <method>saveOrderBefore</method>
+                    </save_order_insurance>
+                </observers>
+            </sales_order_save_before>
+            <sales_order_invoice_save_before>
+                <observers>
+                    <insurance_invoice_save_after>
+                        <class>insurance/observer</class>
+                        <method>invoiceSaveBefore</method>
+                    </insurance_invoice_save_after>
+                </observers>
+            </sales_order_invoice_save_before>
+            <sales_order_creditmemo_save_before>
+                <observers>
+                    <insurance_creditmemo_save_before>
+                        <class>insurance/observer</class>
+                        <method>creditmemoSaveBefore</method>
+                    </insurance_creditmemo_save_before>
+                </observers>
+            </sales_order_creditmemo_save_before>
+        </events>
+        <fieldsets>
+            <sales_convert_quote_address>
+                <insurane_amount>
+                    <to_order>*</to_order>
+                </insurane_amount>
+            </sales_convert_quote_address>
+        </fieldsets>
+        <pdf>
+            <totals>
+                <fee translate="title">
+                    <title>Insutance</title>
+                    <source_field>shipping_insurane_amount</source_field>
+                    <font_size>7</font_size>
+                    <display_zero>0</display_zero>
+                    <sort_order>650</sort_order>
+                    <amount_prefix></amount_prefix>
+                </fee>
+            </totals>
+        </pdf>
     </global>
     <frontend>
         <layout>
@@ -47,15 +133,15 @@
                 </insurance>
             </updates>
         </layout>
-        <routers>
-            <checkout>
-                <args>
-                    <modules>
-                        <shipping_insurance before="Mage_Checkout">Shipping_Insurance</shipping_insurance>
-                    </modules>
-                </args>
-            </checkout>
-        </routers>
+        <!--<routers>-->
+            <!--<checkout>-->
+                <!--<args>-->
+                    <!--<modules>-->
+                        <!--<shipping_insurance before="Mage_Checkout">Shipping_Insurance</shipping_insurance>-->
+                    <!--</modules>-->
+                <!--</args>-->
+            <!--</checkout>-->
+        <!--</routers>-->
     </frontend>
     <adminhtml>
         <layout>

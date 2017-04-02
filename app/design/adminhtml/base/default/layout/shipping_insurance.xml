@@ -37,7 +37,7 @@
 
     <adminhtml_sales_order_creditmemo_view>
         <reference name="creditmemo_totals">
-            <block type="adminhtml/sales_order_totals_item" name="insurance.refunded" template="insurance/sales/order/refunded.phtml">
+            <block type="adminhtml/sales_order_totals_item" name="insurance.refunded" template="insurance/sales/order/total.phtml">
                 <action method="setDisplayArea"><area>footer</area></action>
             </block>
         </reference>
