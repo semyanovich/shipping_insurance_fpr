@@ -8,6 +8,11 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATCH = "insurance_options/main_section/";
 
     /*
+     * Value of percent type
+     */
+    private $percent_type = "2";
+
+    /*
      * return is_enable setting
      */
     public function isEnabled()
@@ -30,7 +35,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig(self::XML_PATCH . 'type', Mage::app()->getStore());
     }
-    
+
     /**
      * Retrieve checkout session model
      *
@@ -60,7 +65,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if ($this->isEnabled()){
             if ($amount = $this->getAmount()) {
-                if ($this->getType() === '2') {
+                if ($this->getType() === $$this->percent_type) {
                     return $this->getCheckout()->getQuote()->getSubtotal() * $amount / 100;
                 }
                 return $amount;
