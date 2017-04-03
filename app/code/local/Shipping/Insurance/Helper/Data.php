@@ -65,7 +65,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if ($this->isEnabled()){
             if ($amount = $this->getAmount()) {
-                if ($this->getType() === $$this->percent_type) {
+                if ($this->getType() === $this->percent_type) {
                     return $this->getCheckout()->getQuote()->getSubtotal() * $amount / 100;
                 }
                 return $amount;

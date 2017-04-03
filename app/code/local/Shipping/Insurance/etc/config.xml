@@ -105,25 +105,6 @@
                 </observers>
             </sales_order_creditmemo_save_before>
         </events>
-        <fieldsets>
-            <sales_convert_quote_address>
-                <insurane_amount>
-                    <to_order>*</to_order>
-                </insurane_amount>
-            </sales_convert_quote_address>
-        </fieldsets>
-        <pdf>
-            <totals>
-                <fee translate="title">
-                    <title>Insutance</title>
-                    <source_field>shipping_insurane_amount</source_field>
-                    <font_size>7</font_size>
-                    <display_zero>0</display_zero>
-                    <sort_order>650</sort_order>
-                    <amount_prefix></amount_prefix>
-                </fee>
-            </totals>
-        </pdf>
     </global>
     <frontend>
         <layout>
@@ -133,15 +114,6 @@
                 </insurance>
             </updates>
         </layout>
-        <!--<routers>-->
-            <!--<checkout>-->
-                <!--<args>-->
-                    <!--<modules>-->
-                        <!--<shipping_insurance before="Mage_Checkout">Shipping_Insurance</shipping_insurance>-->
-                    <!--</modules>-->
-                <!--</args>-->
-            <!--</checkout>-->
-        <!--</routers>-->
     </frontend>
     <adminhtml>
         <layout>
