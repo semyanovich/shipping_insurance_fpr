@@ -10,7 +10,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     /*
      * Value of percent type
      */
-    private $percent_type = "2";
+    const PERCENT_TYPE = "2";
 
     /*
      * return is_enable setting
@@ -34,6 +34,15 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     public function getType()
     {
         return Mage::getStoreConfig(self::XML_PATCH . 'type', Mage::app()->getStore());
+    }
+
+    /*
+     * check if type is Percent
+     *
+     * @return boolean
+     */
+    public function isPercentType(){
+        return $this->getType() === self::PERCENT_TYPE;
     }
 
     /**
@@ -65,7 +74,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if ($this->isEnabled()){
             if ($amount = $this->getAmount()) {
-                if ($this->getType() === $this->percent_type) {
+                if ($this->getType() === self::PERCENT_TYPE) {
                     return $this->getCheckout()->getQuote()->getSubtotal() * $amount / 100;
                 }
                 return $amount;
@@ -75,12 +84,11 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function setInsurance($entity){
-        if (get_class($entity) === "Mage_Sales_Model_Quote_Address") {
-            $data = $entity->getQuote();
+        if ($entity instanceof  Mage_Sales_Model_Quote_Address) {
+            $insurance_amount = $entity->getQuote()->getShippingInsuranceAmount();
         } else {
-            $data = $entity->getOrder();
+            $insurance_amount = $entity->getOrder()->getShippingInsuranceAmount();
         }
-        $insurance_amount = $data->getShippingInsuranceAmount();
         if ($insurance_amount > 0) {
             $entity->setGrandTotal($entity->getGrandTotal() + $insurance_amount);
             $entity->setBaseGrandTotal($entity->getBaseGrandTotal() + $insurance_amount);

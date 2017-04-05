@@ -6,7 +6,7 @@
                 <action method="setTemplate">
                     <template>insurance/onepage/shipping/method.phtml</template>
                 </action>
-                <block type="insurance/checkout_onepage_shipping_method" name="insurance.checkbox" template="insurance/onepage/shipping/method/checkbox.phtml"/>
+                <block type="checkout/onepage_shipping_method" name="insurance.checkbox" template="insurance/onepage/shipping/method/checkbox.phtml"/>
             </block>
         </reference>
     </checkout_onepage_index>

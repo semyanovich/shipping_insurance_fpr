@@ -23,11 +23,6 @@
             <insurance>
                 <class>shipping_insurance_block</class>
             </insurance>
-            <checkout>
-                <rewrite>
-                    <onepage>shipping_insurance_block_checkout_onepage</onepage>
-                </rewrite>
-            </checkout>
         </blocks>
         <sales>
             <quote>

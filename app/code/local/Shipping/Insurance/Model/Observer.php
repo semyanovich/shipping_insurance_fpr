@@ -1,14 +1,13 @@
 <?php
 class Shipping_Insurance_Model_Observer
 {
-    public function saveShippingMethod($observer) {
+    public function saveShippingMethod(Varien_Event_Observer $observer) {
         if(Mage::helper('shipping_insurance')->isEnabled()) {
-            $has_insurance = Mage::app()->getRequest()->getPost('has_insurance', '');
             $quote = Mage::getSingleton('checkout/session')->getQuote();
             $amount = 0;
-            if ($has_insurance === "1") {
+            if ((boolean)Mage::app()->getRequest()->getPost('has_insurance', '')) {
                 if ($amount = Mage::helper('shipping_insurance')->getAmount()) {
-                    if (Mage::helper('shipping_insurance')->getType() === '2') {
+                    if (Mage::helper('shipping_insurance')->isPercentType()) {
                         $amount = $quote->getSubtotal() * $amount / 100;
                     }
                 }
