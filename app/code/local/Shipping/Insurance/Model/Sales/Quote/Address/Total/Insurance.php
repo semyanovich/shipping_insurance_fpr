@@ -2,11 +2,7 @@
 
 class Shipping_Insurance_Model_Sales_Quote_Address_Total_Insurance extends Mage_Sales_Model_Quote_Address_Total_Abstract
 {
-
-    protected $_code = 'insurance';
-
-    protected $shipping_amount = false;
-
+    
     /**
      * Collect fee address amount
      *
@@ -34,7 +30,7 @@ class Shipping_Insurance_Model_Sales_Quote_Address_Total_Insurance extends Mage_
     public function fetch(Mage_Sales_Model_Quote_Address $address)
     {
         parent::fetch($address);
-        if(Mage::helper('shipping_insurance')->isEnabled()) {
+        if (Mage::helper('shipping_insurance')->isEnabled()) {
             if ($address->getAddressType() == 'shipping') {
                 $quote = $address->getQuote();
                 if ($insurance_amount = $quote->getShippingInsuranceAmount()) {

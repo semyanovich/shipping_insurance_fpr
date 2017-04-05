@@ -65,26 +65,26 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getInsurance()
     {
-        if ($this->isEnabled()){
+        if ($this->isEnabled()) {
             if ($amount = $this->getAmount()) {
                 if ($this->isPercentType()) {
                     return $this->getCheckout()->getQuote()->getSubtotal() * $amount / 100;
                 }
                 return $amount;
             }
-        } 
+        }
         return false;
     }
 
     /**
      * set value of shipping amount
-     * 
+     *
      * @param Mage_Sales_Model_Quote_Address | Mage_Sales_Model_Order_Invoice
      * @return Mage_Sales_Model_Quote_Address | Mage_Sales_Model_Order_Invoice
      */
     public function setInsurance($entity)
     {
-        if ($entity instanceof  Mage_Sales_Model_Quote_Address) {
+        if ($entity instanceof Mage_Sales_Model_Quote_Address) {
             $insurance_amount = $entity->getQuote()->getShippingInsuranceAmount();
         } else {
             $insurance_amount = $entity->getOrder()->getShippingInsuranceAmount();
