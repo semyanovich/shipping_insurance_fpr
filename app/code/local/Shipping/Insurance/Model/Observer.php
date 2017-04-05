@@ -1,7 +1,15 @@
 <?php
 class Shipping_Insurance_Model_Observer
 {
-    public function saveShippingMethod(Varien_Event_Observer $observer) {
+
+    /**
+     * Set insurance amount invoiced to the quote
+     *
+     * @param Varien_Event_Observer $observer
+     * @return Shipping_Insurance_Model_Observer
+     */
+    public function saveShippingMethod(Varien_Event_Observer $observer)
+    {
         if(Mage::helper('shipping_insurance')->isEnabled()) {
             $quote = Mage::getSingleton('checkout/session')->getQuote();
             $amount = 0;
@@ -16,7 +24,14 @@ class Shipping_Insurance_Model_Observer
         }
     }
 
-    public function saveOrderBefore(Varien_Event_Observer $observer) {
+    /**
+     * Set insurance amount invoiced to the order
+     *
+     * @param Varien_Event_Observer $observer
+     * @return Shipping_Insurance_Model_Observer
+     */
+    public function saveOrderBefore(Varien_Event_Observer $observer)
+    {
         if ($order = $observer->getEvent()->getOrder()) {
             if ($quote = $observer->getDataObject()->getQuote()) {
                 $insurance_amount = $quote->getShippingInsuranceAmount();
@@ -29,9 +44,9 @@ class Shipping_Insurance_Model_Observer
     }
 
     /**
-     * Set fee amount invoiced to the order
+     * Set insurance amount invoiced to the invoice
      *
-     * @param Varien_Event_Observer $observer
+     * @param Varien_Event_Observer $observer     * 
      * @return Shipping_Insurance_Model_Observer
      */
     public function invoiceSaveBefore(Varien_Event_Observer $observer)
@@ -48,9 +63,9 @@ class Shipping_Insurance_Model_Observer
     }
 
     /**
-     * Set fee amount refunded to the order
+     * Set insurance amount refunded to the order
      *
-     * @param Varien_Event_Observer $observer
+     * @param Varien_Event_Observer $observer     * 
      * @return Shipping_Insurance_Model_Observer
      */
     public function creditmemoSaveBefore(Varien_Event_Observer $observer)

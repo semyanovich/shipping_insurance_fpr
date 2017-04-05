@@ -2,7 +2,7 @@
 
 class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    /*
+    /**
      * Path to settings
      */
     const XML_PATCH = "insurance_options/main_section/";
@@ -12,7 +12,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
      */
     const PERCENT_TYPE = "2";
 
-    /*
+    /**
      * return is_enable setting
      */
     public function isEnabled()
@@ -20,7 +20,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
         return (Mage::getStoreConfig(self::XML_PATCH . 'is_enable', Mage::app()->getStore()) == 1);
     }
 
-    /*
+    /**
      * return value of amount
      */
     public function getAmount()
@@ -28,13 +28,14 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig(self::XML_PATCH . 'amount', Mage::app()->getStore());
     }
 
-     /*
+    /**
      * check if type is Percent
      *
      * @return boolean
      */
-    public function isPercentType(){
-        return $this->getType() === self::PERCENT_TYPE;
+    public function isPercentType()
+    {
+        return (Mage::getStoreConfig(self::XML_PATCH . 'type', Mage::app()->getStore()) === self::PERCENT_TYPE);
     }
 
     /**
@@ -66,7 +67,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if ($this->isEnabled()){
             if ($amount = $this->getAmount()) {
-                if ($this->getType() === self::PERCENT_TYPE) {
+                if ($this->isPercentType()) {
                     return $this->getCheckout()->getQuote()->getSubtotal() * $amount / 100;
                 }
                 return $amount;
@@ -75,7 +76,14 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
         return false;
     }
 
-    public function setInsurance($entity){
+    /**
+     * set value of shipping amount
+     * 
+     * @param Mage_Sales_Model_Quote_Address | Mage_Sales_Model_Order_Invoice
+     * @return Mage_Sales_Model_Quote_Address | Mage_Sales_Model_Order_Invoice
+     */
+    public function setInsurance($entity)
+    {
         if ($entity instanceof  Mage_Sales_Model_Quote_Address) {
             $insurance_amount = $entity->getQuote()->getShippingInsuranceAmount();
         } else {
