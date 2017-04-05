@@ -5,7 +5,7 @@ class Shipping_Insurance_Model_Observer
         if(Mage::helper('shipping_insurance')->isEnabled()) {
             $quote = Mage::getSingleton('checkout/session')->getQuote();
             $amount = 0;
-            if ((boolean)Mage::app()->getRequest()->getPost('has_insurance', '')) {
+            if (Mage::app()->getRequest()->getPost('has_insurance', '')) {
                 if ($amount = Mage::helper('shipping_insurance')->getAmount()) {
                     if (Mage::helper('shipping_insurance')->isPercentType()) {
                         $amount = $quote->getSubtotal() * $amount / 100;
