@@ -28,15 +28,7 @@ class Shipping_Insurance_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfig(self::XML_PATCH . 'amount', Mage::app()->getStore());
     }
 
-    /*
-     * return type setting
-     */
-    public function getType()
-    {
-        return Mage::getStoreConfig(self::XML_PATCH . 'type', Mage::app()->getStore());
-    }
-
-    /*
+     /*
      * check if type is Percent
      *
      * @return boolean
